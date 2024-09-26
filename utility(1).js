@@ -68,14 +68,16 @@ const backToClass = (name) => {
     // указываем конкретные значения ключей
     const entries = Object.entries(filtered);
     // [[key, v] [key, v2]...]
-    for ([key, value] of entries) {
-        if(isObject(value)) {
-            classObject[key] = value.map((item) => backToClass(item));
-        } else {
-            classObject[key] = value;
-        }
-    } 
-    return classObject;
+    //  for ([key, value] of entries) {
+    //     if(_.isObject(value)) {
+    //         classObject[key] = value.map((item) => backToClass(item));
+    //     } else {
+    //         classObject[key] = value;
+    //     }
+    // }
+    entries.forEach(([key,value]) =>{ 
+        classObject[key] = _.isObject(value) ? value.map((item) => backToClass(item)) : value});
+        return classObject;
 }
 
 setPerson({
