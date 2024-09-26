@@ -18,14 +18,14 @@ const setPerson = (person) => {
 
 const deleteDeadPerson = () => {
   const path = getPath('\\people.json');
-  const peopleList = JSON.parse(fs.readFileSync(path));
-  const namePerson = person.name;
-  const alivePeople = peopleList.name;
+    const peopleList = JSON.parse(fs.readFileSync(path));
+    const namePerson = person.name;
+    const alivePeople = peopleList.name;
 
-  const personObj = alivePeople.reduce((accum, { name }, index) => (name === namePerson ? index : accum), 0);
-  peopleList.alive = peopleList.alive.filter(({ name }, index) => index !== personObj);
-  const filtered = listOfPerson.alive.filyer(({ name }) => name !== nameToUpdate);
-  const newArray = [...alivePeople.slice(0, indexAlivePerson - 1), ...array.slice(3)];
+    const personObj = alivePeople.reduce((accum, { name }, index) => (name === namePerson ? index : accum), 0);
+    peopleList.alive = peopleList.alive.filter(({ name }, index) => index !== personObj);
+    const filtered = listOfPerson.alive.filyer(({ name }) => name !== nameToUpdate);
+    const newArray = [...alivePeople.slice(0, indexAlivePerson - 1), ...array.slice(3)];
   // не работает пока (и не заработет походу)
   alivePeople = newArray;
 
