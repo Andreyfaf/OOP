@@ -1,0 +1,13 @@
+{
+  "alive": [
+    {
+      "name": "VIV",
+      "age": 46,
+      "health": 19,
+      "tools": [],
+      "damage": 7,
+      "farmingSkill": 73
+    }
+  ],
+  "dead": []
+}

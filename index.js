@@ -1,13 +1,4 @@
 // абстракция
-class TribleMember {
-  // создаём конструктор объекта
-  constructor(name) {
-    this.name = name;
-    this.age = Math.round(Math.random() * 100);
-    this.health = Math.round(Math.random() * 100);
-    this.tool = [];
-    this.damage = 7;
-  }
 
   getInfo() {
     console.log(`Aбориген ${this.name}, с возрастом ${this.age}, и здоровьем ${this.health}`);
@@ -48,20 +39,8 @@ class TribleMember {
   addTool(tool) {
     this.tool.push(tool);
   }
-}
 
 // дочерние классы
-class Apache extends TribleMember {
-  constructor(name) {
-    // обращаемся к конструктору TribeMember
-    super(name);
-    this.farmingSkill = 60 + Math.round(Math.random() * 40);
-    if (this.health >= 40) {
-      this.health = Math.round(Math.random() * 40);
-    }
-    this.tools = [];
-  }
-
   getDiscription() {
     this.getInfo();
     console.log(`Абориген имеет навык земледелия ${this.farmingSkill}`);
@@ -71,34 +50,15 @@ class Apache extends TribleMember {
     const list = this.tools.map(({ name, durability }) => `${name}, ${durability}`);
     console.log(`${this.name} имеет в багаже ${list.join('; ')}`);
   }
-}
+
 
 // создаём класс реднеков (здоровье выше 60 навык войны)
-class Redneci extends TribleMember {
-  constructor(name) {
-    super(name);
-    this.warSkill = Math.round(Math.random() * 40);
-    if (this.health <= 40) {
-      this.health = 60 + Math.round(Math.random() * 40);
-    }
-    this.tools = [];
-  }
-
   getDiscription() {
     this.getInfo();
     console.log(`Абориген имеет навык войны ${this.warSkill}`);
-  }
-}
+ }
 
 // создадим класс оружия
-class Item {
-  constructor(name) {
-    this.name = name;
-    this.durability = 100;
-    // Math.round(Math.random() * 5);
-    this.damage = 5;
-  }
-
   use() {
     if (this.durability > 0) {
       this.durability -= 1;
@@ -108,21 +68,6 @@ class Item {
     console.log(`${this.name} cломан, больше не исаользуется.`);
     return false;
   }
-}
-
-class Weapon extends Item {
-  constructor(name) {
-    super(name);
-    this.durability += 3;
-  }
-}
-
-class Tools extends Item {
-  constructor(name) {
-    super(name);
-    this.durability = Math.round(Math.random() * 3);
-  }
-}
 
 const Vitaly = new Redneci('VIV');
 Vitaly.getDiscription();

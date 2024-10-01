@@ -1,10 +1,35 @@
 import fs from 'fs';
 import path from 'path';
-import lodash from 'lodash';
+import _ from 'lodash';
 import readlineSync from 'readline-sync';
+import { Apache } from './tribes.js';
+import { Redneci } from './tribes.js';
+import { Tools } from './tribes.js';
+import { Weapon } from './tribes.js';
 import {
   Apache, Redneci, Weapon, Tools,
 } from './tribes.js';
+
+// ф-ция, создающая новый объект класса и сохраняющая его в p.json
+const createObject = () => {
+  const classes = ['Apache', 'Redneci', 'Tools', 'Weapon'];
+  const classToCreate = readlineSync.keyInSelect(classes, 'what create?');
+
+  if(classToCreate === -1) {
+    console.log('ну не надо, так не надо');
+    return false;
+  }
+
+  const name = classToCreate < 2 ? readlineSync.question('Имя: ') 
+  : readlineSync.question('Название: ');
+
+  const obj = classToCreate === 0 ? new Apache(name) 
+  : classToCreate === 1 ? new Redneci(name) 
+    : classToCreate === 2 ? new Tools(name) : new Weapon(name);
+
+  console.log(obj);
+  setPerson(obj);
+};
 
 const getPath = (fPath) => path.resolve() + fPath;
 
@@ -18,14 +43,14 @@ const setPerson = (person) => {
 
 const deleteDeadPerson = () => {
   const path = getPath('\\people.json');
-    const peopleList = JSON.parse(fs.readFileSync(path));
-    const namePerson = person.name;
-    const alivePeople = peopleList.name;
+  const peopleList = JSON.parse(fs.readFileSync(path));
+  const namePerson = person.name;
+  const alivePeople = peopleList.name;
 
-    const personObj = alivePeople.reduce((accum, { name }, index) => (name === namePerson ? index : accum), 0);
-    peopleList.alive = peopleList.alive.filter(({ name }, index) => index !== personObj);
-    const filtered = listOfPerson.alive.filyer(({ name }) => name !== nameToUpdate);
-    const newArray = [...alivePeople.slice(0, indexAlivePerson - 1), ...array.slice(3)];
+  const personObj = alivePeople.reduce((accum, { name }, index) => (name === namePerson ? index : accum), 0);
+  peopleList.alive = peopleList.alive.filter(({ name }, index) => index !== personObj);
+  const filtered = listOfPerson.alive.filyer(({ name }) => name !== nameToUpdate);
+  const newArray = [...alivePeople.slice(0, indexAlivePerson - 1), ...array.slice(3)];
   // не работает пока (и не заработет походу)
   alivePeople = newArray;
 
@@ -88,3 +113,5 @@ setPerson({
   damage: 7,
   farmingSkill: 73,
 });
+
+export {createObject, deleteDeadPerson, updatePerson};
