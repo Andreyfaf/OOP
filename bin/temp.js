@@ -1,4 +1,4 @@
-import { createObject } from "../utility(1)";
+import { createObject, addItem } from "../utility(1)";
 
 createObject();
 
@@ -7,3 +7,5 @@ createObject();
 // import { Tools } from "../tribes";
 // import { Weapon } from "../tribes";
 
+createObject();
+addItem();
