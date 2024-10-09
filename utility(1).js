@@ -75,6 +75,14 @@ const setObject = (object) => {
   // сперва узнаём путь, потом пушим в живых person
 };
 
+const deleteObject = (object) => {
+  const listOfObjects = getObject();
+  const nameOfdead = object.name;
+  const filtered = listOfObjects.alive.filter(({name}) => name !== nameOfdead);
+  listOfObjects.alive = filtered;
+  updateJSON(listOfObjects);
+}
+
 const deleteDeadPerson = () => {
   const path = getPath('\\people.json');
   const peopleList = JSON.parse(fs.readFileSync(path));
@@ -98,6 +106,7 @@ const updatePerson = (person) => {
   const listOFPerson = JSON.parse(fs.readFileSync(fPath, 'utf-8'));
   const nameToUpdate = person.name;
 };
+
 
 // возвращение объектов json к типу объектов класса
 const backToClass = (nameToFined) => {
@@ -153,4 +162,4 @@ setPerson({
   farmingSkill: 73,
 });
 
-export {createObject, deleteDeadPerson, updatePerson, setObject, addItem};
+export {deleteObject, createObject, deleteDeadPerson, updatePerson, setObject, addItem};
