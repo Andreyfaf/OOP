@@ -60,6 +60,16 @@ const getObject = () => JSON.parse(fs.readFileSync(getPath(), 'utf-8'));
 
 const updateJSON = (dataToUpdate) => fs.writeFileSync(getPath(), JSON.stringify(dataToUpdate, null, 2), 'utf-8');
 
+const classesConstructor = (key, name) => {
+  const classes = {
+    0: new Apache(name),
+    1: new Redneci(name),
+    2: new Tools(name),
+    3: new Weapon(name)
+  };
+  return classes[key];
+};
+
 const setObject = (object) => {
   const listOfObject = getObject();
   if (['Apache', 'Redneci'].includes(object.className)) {
@@ -162,4 +172,4 @@ setPerson({
   farmingSkill: 73,
 });
 
-export {deleteObject, createObject, deleteDeadPerson, updatePerson, setObject, addItem};
+export {classesConstructor, deleteObject, createObject, deleteDeadPerson, updatePerson, setObject, addItem};
