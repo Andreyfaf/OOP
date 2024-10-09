@@ -119,9 +119,9 @@ const updatePerson = (person) => {
 };
 
 const updateObject = (object) => {
-  const listOfObjects = getObject();
-  const nameToUpdate = object.name;
-  const filtered = listOfObjects.alive.filter(({name}) => name !== nameToUpdate);
+  const listOfObject = (object.alive).Apache(({name}) => name !== object)
+  listOfObject = filtered(object);
+  listOfObject = alive.push(object);
 }
 // возвращение объектов json к типу объектов класса
 const backToClass = (nameToFined) => {

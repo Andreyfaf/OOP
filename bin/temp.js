@@ -2,10 +2,10 @@ import { createObject, addItem } from "../utility(1)";
 
 createObject();
 
-// import { Apache } from "../tribes";
-// import { Redneci } from "../tribes";
-// import { Tools } from "../tribes";
-// import { Weapon } from "../tribes";
+ import { Apache } from "../classes/apache.js";
+ import { Redneci } from "../classes/Redneci.js";
+ import { Tools } from "../classes/Tools.js";
+ import { Weapon } from "../classes/Weapon.js";
 
 createObject();
 addItem();
