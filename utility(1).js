@@ -24,9 +24,9 @@ const createObject = () => {
   const name = classToCreate < 2 ? readlineSync.question('Имя: ') 
   : readlineSync.question('Название: ');
 
-  const obj = classToCreate === 0 ? new Apache(name) 
-  : classToCreate === 1 ? new Redneci(name) 
-    : classToCreate === 2 ? new Tools(name) : new Weapon(name);
+  // const obj = classToCreate === 0 ? new Apache(name) 
+  // : classToCreate === 1 ? new Redneci(name) 
+  //   : classToCreate === 2 ? new Tools(name) : new Weapon(name);
 
   console.log(obj);
   setPerson(obj);
@@ -49,7 +49,7 @@ const addItem = () => {
     return false;
   }
   person.addTool(item);
-  updateObject(person);
+  // updateObject(person);
   return true;
 }
 
@@ -65,7 +65,7 @@ const classesConstructor = (key, name) => {
     0: new Apache(name),
     1: new Redneci(name),
     2: new Tools(name),
-    3: new Weapon(name)
+    3: new Weapon(name),
   };
   return classes[key];
 };
@@ -84,6 +84,7 @@ const setObject = (object) => {
   // fs.writeFileSync(path, JSON.stringify(peopleList, null, 2), 'utf-8');
   // сперва узнаём путь, потом пушим в живых person
 };
+
 
 const deleteObject = (object) => {
   const listOfObjects = getObject();
@@ -117,7 +118,11 @@ const updatePerson = (person) => {
   const nameToUpdate = person.name;
 };
 
-
+const updateObject = (object) => {
+  const listOfObjects = getObject();
+  const nameToUpdate = object.name;
+  const filtered = listOfObjects.alive.filter(({name}) => name !== nameToUpdate);
+}
 // возвращение объектов json к типу объектов класса
 const backToClass = (nameToFined) => {
   // читаем json
@@ -130,23 +135,26 @@ const backToClass = (nameToFined) => {
     filtered = listOFPerson.alive.filter(({ nameIter }) => name === nameToFined).at(0);
   };
   const jsonObject = filtered.at(0);
+  const classes = ['apache', 'redneck', 'tool', 'weapon'];
+  const key = ['apache', 'redneck', 'tool', 'weapon'].indexOf(jsonObject.className);
   // [{}] -> {}
   // преобразовываем в объект класса
-  let classObject;
-  switch (filtered.at(0).className) {
-    case 'Apache':
-      classObject = new Apache(nameToFined);
-      break;
-    case 'Redneci':
-      classObject = new Redneci(nameToFined);
-      break;
-    case 'Weapon':
-      classObject = new Weapon(nameToFined);
-      break;
-    default:
-      classObject = new Tools(nameToFined);
-      break;
-  }
+  const classObject = classesConstructor(key, nameToFined);
+  // switch (filtered.at(0).className) {
+  // const entries = object.entries(jsonObject)
+  //   case 'Apache':
+  //     classObject = new Apache(nameToFined);
+  //     break;
+  //   case 'Redneci':
+  //     classObject = new Redneci(nameToFined);
+  //     break;
+  //   case 'Weapon':
+  //     classObject = new Weapon(nameToFined);
+  //     break;
+  //   default:
+  //     classObject = new Tools(nameToFined);
+  //     break;
+  // }
   // указываем конкретные значения ключей
   const entries = Object.entries(jsonObject);
   // [[key, v] [key, v2]...]
@@ -172,4 +180,4 @@ setPerson({
   farmingSkill: 73,
 });
 
-export {classesConstructor, deleteObject, createObject, deleteDeadPerson, updatePerson, setObject, addItem};
+export {updateObject, classesConstructor, deleteObject, createObject, deleteDeadPerson, updatePerson, setObject, addItem};
